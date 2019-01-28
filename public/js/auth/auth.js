@@ -1,15 +1,13 @@
 
 const message = document.getElementById('message');
 const profile = document.getElementById('profile');
-const user = document.getElementById('user');
+
 
 window.autentica = {
   creaCuentaEmailPass: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
-      // result.user.updateProfile({
-      //   displayName: name
-      // })
+
 
       const configuracion = {
         url: 'http://localhost:3000/'
@@ -30,7 +28,7 @@ window.autentica = {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(result => {
       if(result.user.emailVerified) {
-        user.innerHTML = "Bienvenida a Geek";
+        usuario.innerHTML = "Bienvenida a Geek";
         profile.classList.remove("hidden");
         profile.classList.add("show");
         bienvenida.classList.remove("show");
@@ -41,7 +39,7 @@ window.autentica = {
         profile.classList.add("hidden");
         bienvenida.classList.remove("hidden");
         bienvenida.classList.add("show");
-        user.innerHTML = "Por favor realiza la verificacion por email";
+        usuario.innerHTML = "Por favor realiza la verificacion por email";
       }
     })
     .catch(error => {

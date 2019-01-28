@@ -4,7 +4,6 @@ const btnPost = document.getElementById('btnPost');
 
 btnPost.addEventListener('click', () => {
   sessionStorage.setItem('imgNewPost', null)
-  const post = new Post();
   const user = firebase.auth().currentUser;
 
   if(user == null){

@@ -1,35 +1,30 @@
-class Post {
-  constructor () {
-    this.db = firebase.firestore();
-    // this.db.settings({
-    //   timestampsInSnapshots: true
-    // });
-    // console.log(this.db)
-  }
-
-  crearPost (uid, emailUser, title, description, imageLink, videoLink) {
-    return this.db.collection('posts').add({
+const getDb = () => firebase.firestore();
+window.post= {
+  crearPost: (uid, emailUser, title, description, imageLink, videoLink) => {
+    const db = getDb();
+    return db.collection('posts').add({
       uid: uid,
       autor: emailUser,
       title: title,
       description: description,
       imageLink: imageLink,
       videoLink: videoLink,
-      date: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(refDoc => {
+      date: new Date()
     }).catch(error => console.log('Error', error))
-  }
+  },
 
-  consultarTodosPost () {
+  consultarTodosPost: () => {
     const posts = document.getElementById('posts');
-    this.db.collection('posts').onSnapshot(querySnapshot => {
+    const db = getDb();
+    db.collection('posts').onSnapshot(querySnapshot => {
       while(posts.firstChild) posts.removeChild(posts.firstChild);
       if(querySnapshot.empty) {
         console.log('vacio');
       } else {
         querySnapshot.forEach(post => {
-          let date = new Date(post.data().date.seconds).toLocaleDateString("es-ES");
-          let postHtml = this.obtenerPostTemplate(
+        //   let date = new Date(post.data().date.seconds).toLocaleDateString("es-ES");
+        // console.log(post.data().date.toDate())
+          let postHtml = obtenerPostTemplate(
             post.data().autor,
             post.data().title,
             post.data().description,
@@ -41,39 +36,17 @@ class Post {
         })
       }
     })
-  }
+  },
+}
 
-  // consultPostUsuario(emailUser) {
-  //   const posts = document.getElementById('posts');
-  //   this.db.collection('posts').where('autor', "==", emailUser)
-  //   .onSnapshot(querySnapshot => {
-  //     while(posts.firstChild) posts.removeChild(posts.firstChild);
-  //     if(querySnapshot.empty) {
-  //       console.log('vacio');
-  //     } else {
-  //       querySnapshot.forEach(post => {
-  //         let postHtml = this.obtenerPostTemplate(
-  //           post.data().autor,
-  //           post.data().title,
-  //           post.data().description,
-  //           post.data().imageLink,
-  //           post.data().videoLink,
-  //           Utilidad.obtenerFecha(post.data().date.toDate())
-  //         )
-  //         posts.appendChild(postHtml);
-  //       })
-  //     }
-  //   })
-  // }
-
-  obtenerPostTemplate (
+const obtenerPostTemplate = (
     autor,
     title,
     description,
     imageLink,
     videoLink,
     date
-  ) {
+  ) => {
     let div = document.createElement('div');
     if (imageLink) {
       div.innerHTML =`<article class="post">
@@ -145,4 +118,3 @@ class Post {
             </article>`
     return div;
   }
-}

@@ -9,20 +9,22 @@ const btnLogout = document.getElementById('btnLogout');
 const perfil = document.getElementById('perfil');
 const bienvenida = document.getElementById('bienvenida');
 const btnMyPost =document.getElementById('btnMyPost');
+const usuario = document.getElementById('user');
+
 
 window.onload = () => {
 
   firebase.initializeApp(config);
 
-  const poster = new Post();
-  poster.consultarTodosPost();
+  // const poster = new Post();
+  post.consultarTodosPost();
 
 
   firebase.auth().onAuthStateChanged(user => {
     const message = document.getElementById('message');
 
     if (user) {
-      message.innerHTML = "Bienvenida " + user.displayName;
+      usuario.innerHTML = "Bienvenida " + user.displayName;
       perfil.classList.add("show");
       perfil.classList.remove("hidden");
       bienvenida.classList.remove("show");
@@ -65,7 +67,7 @@ window.onload = () => {
     const user = firebase.auth().currentUser;
     console.log(user);
     if(user) {
-      poster.consultPostUsuario(user.email)
+      post.consultPostUsuario(user.email)
     } else {
       console.log('Autenticate')
     }
