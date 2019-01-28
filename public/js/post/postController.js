@@ -10,7 +10,7 @@ btnPost.addEventListener('click', () => {
   if(user == null){
     return console.log('Autenticar Usuario')
   }
-  
+
   const autor = document.getElementById('autor').value;
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;

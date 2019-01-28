@@ -10,11 +10,11 @@
   <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-  <section class="section">
-    <div id="login" class="container">
+  <section id='bienvenida' >
+    <div class="container">
       <div>
         <h4 class="title">
-            Bienvenido al Blog Geek
+          Bienvenido al Blog Geek
         </h4>
       </div>
 
@@ -25,83 +25,89 @@
         </div>
       </div>
 
-      <div>
-        <!-- <div class="input-field">
-            <input  type="text" required/>
-            <label >Nombre:</label>
-        </div> -->
-        <div class="input-field">
-            <input id="emailSesion" type="email" required/>
-            <label for="emailSesion">E-mail:</label>
+      <div class="field">
+        <label for="emailSesion" class="label">E-mail:</label>
+        <div class="control">
+          <input class="input" id="emailSesion" type="email" placeholder="Email" required />
         </div>
-        <div class="input-field">
-            <input id="passwordSesion" type="password" required />
-            <label for="passwordSesion">Password:</label>
+      </div>
+
+      <div class="field">
+        <label for="passwordSesion" class="label">Password:</label>
+        <div class="control">
+          <input class="input" id="passwordSesion" type="password" placeholder="Contraseña" required />
         </div>
+      </div>
+
+      <div class="text-center">
         <div>
-          <button id="btnLoginEmail">Iniciar Sesión</button>
+          <button class="button is-primary"  id="btnIniciaSesion">Iniciar Sesión</button>
         </div>
-        <div class="lbl-ingresar-redes">
-            <span>INGRESA CON:</span>
+
+        <div>
+          <p class="subtitle is-5">INGRESA CON:</p>
         </div>
+
         <div class="registro-iconos-redes">
-            <a id="authFB" href="#">Facebook</a>
-            <a id="authGoogle" href="#">Google</a>
+          <a id="authFB" href="#">Facebook</a>
+          <a id="authGoogle" href="#">Google</a>
+        </div>
+
+        <div>
+          <button class="button is-primary" id="btnCreaCuenta">Crear una cuenta</button>
+        </div>
+
+        <div id='profile'>
+          <p class="subtitle is-5" id="message"></p>
         </div>
       </div>
-      <div">
-        <button id="btnSignIn">Crear una cuenta</button>
-      </div>
-      <div id='profile'>
-        <p id="message"></p>
-      </div>
+
     </div>
   </section>
-  <section id="userOneline" class="hidden">
-    <section>
-      <div id="user"></div>
-      <button id="btnLogout">Cerrar Sesion</button>
-    </section>
-    <section id="post">
-      <h4>Escribe tus Posts</h4>
-      <div>
-        <div class="input-field">
-          <label for="autor">Autor:</label>
-          <input id="autor" type="text" required/>
+  <section id="perfil" class="hidden">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half-desktop">
+            <section>
+                <div id="user"></div>
+                <button class="button is-warning" id="btnLogout">Cerrar sesión</button>
+              </section>
+              <section id="post">
+                <h4 class="title">Escribe tus Posts</h4>
+                <div>
+                  <div class="input-field">
+                    <label for="autor">Autor:</label>
+                    <input id="autor" type="text" required/>
+                  </div>
+                  <div class="input-field">
+                    <label for="title">Titulo:</label>
+                    <input id="title" type="text" required/>
+                  </div>
+                  <div class="input-field">
+                    <label for="description">Descripcion</label>
+                    <input id="description" type="text" required />
+                  </div>
+                  <div class="input-field">
+                    <label for="btnUploadFile">Imagen:</label>
+                    <input type="file" value="upload" id="btnUploadFile" />
+                  </div>
+                  <div class="input-field">
+                    <label for="videoLink">Video</label>
+                    <input id="videoLink" type="text" required />
+                  </div>
+                  <div>
+                    <button id="btnPost">Postear</button>
+                  </div>
+              </section>
+              <section>
+                <h3>Todos los Post</h3>
+                  <button id="btnMyPost">Mis posts</button>
+                  <div id="posts"></div>
+              </section>
+            </section>
         </div>
-        <div class="input-field">
-          <label for="title">Titulo:</label>
-          <input id="title" type="text" required/>
-        </div>
-        <div class="input-field">
-          <label for="description">Descripcion</label>
-          <input id="description" type="text" required />
-        </div>
-        <div class="input-field">
-          <label for="btnUploadFile">Imagen:</label>
-          <input type="file" value="upload" id="btnUploadFile" />
-        </div>
-        <div class="input-field">
-          <label for="videoLink">Video</label>
-          <input id="videoLink" type="text" required />
-        </div>
-        <div>
-          <button id="btnPost">Postear</button>
-        </div>
-    </section>
-    <section>
-      <h3>Todos los Post</h3>
-        <button id="btnMyPost">Mis posts</button>
-        <div id="posts"></div>
-    </section>
-  </section>
-
-  <div class="columns">
-    <div class="column">1</div>
-    <div class="column">2</div>
-    <div class="column">3</div>
-    <div class="column">4</div>
-  </div>
+      </div>
+    </div>
 </body>
 
 <!-- Firebase App is always required and must be first -->

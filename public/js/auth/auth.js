@@ -1,10 +1,10 @@
 
 const message = document.getElementById('message');
 const profile = document.getElementById('profile');
+const user = document.getElementById('user');
 
-class Autentication {
-
-  CreateAccountEmailPass (email, password) {
+window.autentica = {
+  creaCuentaEmailPass: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
       // result.user.updateProfile({
@@ -23,29 +23,34 @@ class Autentication {
     }).catch(function(error) {
       console.log(error.message)
     });
-  }
+  },
 
-  AuthEmailPass (email, password) {
+
+  iniciaSesion: (email, password) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(result => {
       if(result.user.emailVerified) {
-        message.innerHTML = "Bienvenida a Geek";
+        user.innerHTML = "Bienvenida a Geek";
         profile.classList.remove("hidden");
         profile.classList.add("show");
+        bienvenida.classList.remove("show");
+        bienvenida.classList.add("hidden");
       } else {
         firebase.auth().signOut();
-        profile.classList.remove("hidden");
-        profile.classList.add("show");
-        message.innerHTML = "Por favor realiza la verificacion por email";
+        profile.classList.remove("show");
+        profile.classList.add("hidden");
+        bienvenida.classList.remove("hidden");
+        bienvenida.classList.add("show");
+        user.innerHTML = "Por favor realiza la verificacion por email";
       }
     })
     .catch(error => {
       message.innerHTML = "Email o password incorrecto";
       console.log(error.message)
     });
-  }
+  },
 
-  AuthGoogle () {
+  autenticaGoogle: () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
     .then(result => {
@@ -56,9 +61,9 @@ class Autentication {
     }).catch(error => {
       console.log(error);
     });
-  }
+  },
 
-  AuthFb() {
+  autenticaFb: () => {
     const provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider)
     .then(result => {
@@ -70,8 +75,9 @@ class Autentication {
       console.log(error);
     });
 
-  }
-  LogOut() {
+  },
+
+  cierraSesion:() => {
     firebase.auth().signOut().then(() => {
       profile.classList.add("hidden");
       profile.classList.remove("show");

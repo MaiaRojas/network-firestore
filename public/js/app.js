@@ -1,13 +1,13 @@
 
 const email = document.getElementById('emailSesion').value;
 const password = document.getElementById('passwordSesion').value;
-const btnLoginEmail = document.getElementById('btnLoginEmail');
+const btnIniciaSesion = document.getElementById('btnIniciaSesion');
 const authFB = document.getElementById('authFB');
 const authGoogle = document.getElementById('authGoogle');
 const btnSignIn = document.getElementById('btnSignIn');
 const btnLogout = document.getElementById('btnLogout');
-const userOneline = document.getElementById('userOneline');
-const login = document.getElementById('login');
+const perfil = document.getElementById('perfil');
+const bienvenida = document.getElementById('bienvenida');
 const btnMyPost =document.getElementById('btnMyPost');
 
 window.onload = () => {
@@ -22,45 +22,43 @@ window.onload = () => {
     const message = document.getElementById('message');
 
     if (user) {
-      login.classList.add("hidden");
       message.innerHTML = "Bienvenida " + user.displayName;
-      userOneline.classList.add("show");
-      userOneline.classList.remove("hidden");
+      perfil.classList.add("show");
+      perfil.classList.remove("hidden");
+      bienvenida.classList.remove("show");
+      bienvenida.classList.add("hidden");
     } else {
-      login.classList.remove("hidden");
       message.innerHTML = "Aun no has iniciado sesion";
-      userOneline.classList.remove("show");
-      userOneline.classList.add("hidden");
+      perfil.classList.remove("show");
+      perfil.classList.add("hidden");
+      bienvenida.classList.remove("hidden");
+      bienvenida.classList.add("show");
     }
   });
 
-  btnLoginEmail.addEventListener('click', () => {
+
+  btnCreaCuenta.addEventListener('click', () => {
     const email = document.getElementById('emailSesion').value;
     const password = document.getElementById('passwordSesion').value;
-    const auth =  new Autentication();
-    auth.AuthEmailPass(email, password);
+    autentica.creaCuentaEmailPass(email, password);
+  });
+
+  btnIniciaSesion.addEventListener('click', () => {
+    const email = document.getElementById('emailSesion').value;
+    const password = document.getElementById('passwordSesion').value;
+    autentica.iniciaSesion(email, password);
   });
 
   authFB.addEventListener('click', () => {
-    const auth =  new Autentication();
-    auth.AuthFb();
+    autentica.autenticaFb();
   });
 
   authGoogle.addEventListener('click', () => {
-    const auth =  new Autentication();
-    auth.AuthGoogle();
-  });
-
-  btnSignIn.addEventListener('click', () => {
-    const email = document.getElementById('emailSesion').value;
-    const password = document.getElementById('passwordSesion').value;
-    const auth =  new Autentication();
-    auth.CreateAccountEmailPass(email, password);
+    autentica.autenticaGoogle();
   });
 
   btnLogout.addEventListener('click', () => {
-    const auth =  new Autentication();
-    auth.LogOut();
+    autentica.cierraSesion();
   })
 
   btnMyPost.addEventListener('click', () => {
